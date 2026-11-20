@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Shore — GTA-style Cover Maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">NEON<span>SHORE</span></div>
+  <div class="tagline">Turn any photo into a GTA-style poster cover — offline, free, no upload.</div>
+  <div class="steps"><b>1</b> Add photo <b>2</b> Pick layout <b>3</b> Export PNG</div>
+</header>
+<main class="layout">
+  <section class="panel controls" aria-label="Cover controls">
+    <h2>Your photos</h2>
+    <div class="row">
+      <label class="btn file-btn">+ Add photos
+        <input id="fileInput" type="file" accept="image/*" multiple hidden>
+      </label>
+      <button class="btn ghost" id="sampleBtn" type="button">Use sample photos</button>
+    </div>
+    <div id="photoStrip" class="strip" aria-label="Loaded photos"></div>
+    <p class="hint">Click a photo, then click a panel to put it there. Drag a panel to move the photo, use the sliders to zoom and position it.</p>
+
+    <h2>Layout</h2>
+    <div class="row seg" id="layoutSeg" role="group" aria-label="Layout">
+      <button type="button" data-layout="hero" class="seg-btn active">Hero + 3</button>
+      <button type="button" data-layout="grid" class="seg-btn">Nine-panel grid</button>
+      <button type="button" data-layout="full" class="seg-btn">Full-bleed</button>
+    </div>
+
+    <h2>Sunset grade</h2>
+    <div class="row swatches" id="gradeSwatches" role="group" aria-label="Colour grade">
+      <button type="button" data-grade="sunset" class="sw active" style="--g1:#ff9a3d;--g2:#ff2e88" title="Sunset">Sunset</button>
+      <button type="button" data-grade="neon" class="sw" style="--g1:#00e5ff;--g2:#ff2e88" title="Neon">Neon</button>
+      <button type="button" data-grade="vice" class="sw" style="--g1:#ff7a18;--g2:#7b2eff" title="Vice">Vice</button>
+      <button type="button" data-grade="noir" class="sw" style="--g1:#8a8a8a;--g2:#111111" title="Noir">Noir</button>
+      <button type="button" data-grade="palm" class="sw" style="--g1:#2effa8;--g2:#ff9a3d" title="Palm">Palm</button>
+    </div>
+
+    <h2>Caption</h2>
+    <label class="field">Title
+      <input id="titleInput" type="text" value="NEON SHORE" maxlength="24">
+    </label>
+    <label class="field">Subtitle
+      <input id="subtitleInput" type="text" value="a coast story in three acts" maxlength="48">
+    </label>
+    <label class="field">Badge
+      <input id="badgeInput" type="text" value="EST. 2026 • SUNSET COAST" maxlength="32">
+    </label>
+
+    <h2>Selected panel</h2>
+    <div class="row">
+      <button class="btn small" id="fillAllBtn" type="button">Fill all panels with this photo</button>
+      <button class="btn small ghost" id="shuffleBtn" type="button">Shuffle photos</button>
+    </div>
+    <label class="field">Zoom <span id="zoomVal">1.20×</span>
+      <input id="zoomInput" type="range" min="1" max="3" step="0.05" value="1.2">
+    </label>
+    <label class="field">Position X <span id="xVal">50%</span>
+      <input id="xInput" type="range" min="0" max="100" step="1" value="50">
+    </label>
+    <label class="field">Position Y <span id="yVal">50%</span>
+      <input id="yInput" type="range" min="0" max="100" step="1" value="50">
+    </label>
+
+    <h2>Export size</h2>
+    <div class="row seg" id="sizeSeg" role="group" aria-label="Export size">
+      <button type="button" data-size="1080x1080" class="seg-btn">1080 × 1080</button>
+      <button type="button" data-size="1080x1350" class="seg-btn">1080 × 1350</button>
+      <button type="button" data-size="1920x1080" class="seg-btn active">1920 × 1080</button>
+    </div>
+    <button class="btn big" id="exportBtn" type="button">⬇ Export cover PNG</button>
+    <p class="hint" id="statusLine">Add a photo or tap “Use sample photos” to start.</p>
+  </section>
+
+  <section class="panel stage" aria-label="Live preview">
+    <div class="stage-head">
+      <h2>Live preview</h2>
+      <span id="sizeLabel">1920 × 1080</span>
+    </div>
+    <canvas id="preview" width="960" height="540"></canvas>
+    <p class="hint">Click any panel in the preview to select it. The exported PNG is the exact cover you see here, at full size.</p>
+    <div id="exportStrip" class="strip export-strip" aria-label="Exported covers"></div>
+  </section>
+</main>
+<footer class="foot">Neon Shore Cover Maker — an original offline tool. All art, lettering and sample photos are original works made for this app. Not affiliated with any game studio.</footer>
+<script src="app.js"></script>
+</body>
+</html>
